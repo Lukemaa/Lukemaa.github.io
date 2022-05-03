@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>在一起x个月,感谢相伴。</title>
+    <link rel="stylesheet" href="bootstrap-3.4.1-dist/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="img/icon.svg" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+</head>
+<body>
+<audio id="audio" src="./music.mp3" loop="loop"></audio>
+<div id="back">
+    <div class="mask"></div>
+    <!-- 设置展示的图片，github pages不能有后台程序只能一条一条手动添加了 囧 -->
+    <div id="carousel" class="carousel slide carousel-fade carousel-position">
+        <div class="carousel-inner" style="width: 100%;height: 100%;" id="background">
+            <div class="item active" style="width: 100%;height: 100%;">
+                <div style="width: 100%;height: 100%;background:url(./img/1.jpg);background-size: cover;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal show" style="top:24%;">
+    <div class="modal-dialog" style="opacity: .9">
+        <div class="modal-content" style="opacity:.85">
+            <div class="modal-header">
+                <h1 class="text-center" style="color: #A94442;font-family: 'MaShanZheng-Regular', Arial, sans-serif;font-size: 7rem;">the times we together</h1>
+                <p class="text-center small-title">LOVING ON THE WAY</p>
+            </div>
+            <div class="modal-body text-center" style="line-height: 1.5rem;font-family: 'MaShanZheng-Regular', Arial, sans-serif;font-size: 3rem;">
+                <p>
+                    <span id="day" class="time-font">213</span><span style="color:#A94442">/&nbsp;</span><span id="hour" class="time-font">22</span><span style="color:#A94442">/&nbsp;</span><span id="minute" class="time-font">35</span><span style="color:#A94442">/&nbsp;</span><span id="second" class="time-font">12</span>
+                </p>
+                <p>
+                    days/hours/min/sec
+                </p>
+                <p class="text-center" style="color: rgb(169, 68, 66); font-size: 17px; padding-top: 15px; padding-bottom: 20px; display: block;" id="say">〖而后〗书不成字，纸短情长</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="./js/jquery.js"></script>
+<script type="text/javascript" src="bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./js/count-time.js"></script>
+<script>
+    let $1 = $(function() {
+        //设置起始日期
+        countTime('2000/01/01 00:00', 'day', 'hour', 'minute', 'second');
+        var days = $('#day').text();
+
+        // 设置标题
+        if (parseInt(days / 365) != 0) {
+            $(document).attr("title", "在一起" + parseInt(days / 365) + "年,感谢相伴。");
+        } else if (parseInt(days / 30) != 0) {
+            $(document).attr("title", "在一起" + parseInt(days / 30) + "个月,感谢相伴。");
+        } else
+            $(document).attr("title", "在一起" + days + "天,感谢相伴。");
+
+        //设置每一张图片对应的文字
+        var says = new Array(
+            '〖〗样例行 1',
+            '〖〗样例行 2',
+            '〖〗样例行 3',
+            '〖〗样例行 4',
+            '〖〗样例行 5',
+            '〖〗样例行 6'
+        );
+
+
+        var start = function() {
+            var index = 0;
+            var rate = 6000;
+            $('#say').text(says[(index++) % says.length]);
+            var _play = function () {
+                $('#say').hide();
+                $('#say').text(says[(index++) % says.length]);
+                $('#say').fadeToggle();
+                $('#carousel').carousel('next');
+            };
+            setInterval(_play, rate);
+        }();
+
+    });
+    document.addEventListener("click",function (){
+        function audioAutoPlay(){
+            const audio = document.getElementById('audio')
+            audio.play()
+        }
+        audioAutoPlay()
+    })
+    document.addEventListener("touchstart",function (){
+        function audioAutoPlay(){
+            const audio = document.getElementById('audio')
+            audio.play()
+        }
+        audioAutoPlay()
+    })
+</script>
+
+</body>
+</html>
+
+
